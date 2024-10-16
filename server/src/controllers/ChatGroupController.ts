@@ -1,7 +1,8 @@
-const prisma = require("../config/db.config.js");
+import { Request, Response } from "express";
+import prisma from "../config/db.config.js";
 
 class ChatGroupController {
-  static async index(req, res) {
+  static async index(req: Request, res: Response) {
     try {
       const user = req.user;
       const groups = await prisma.chatGroup.findMany({
@@ -16,11 +17,11 @@ class ChatGroupController {
     } catch (error) {
       return res
         .status(500)
-        .json({ message: "Something went wrong. Please try again!" });
+        .json({ message: "Something went wrong.please try again!" });
     }
   }
 
-  static async show(req, res) {
+  static async show(req: Request, res: Response) {
     try {
       const { id } = req.params;
       if (id) {
@@ -31,15 +32,16 @@ class ChatGroupController {
         });
         return res.json({ data: group });
       }
+
       return res.status(404).json({ message: "No groups found" });
     } catch (error) {
       return res
         .status(500)
-        .json({ message: "Something went wrong. Please try again!" });
+        .json({ message: "Something went wrong.please try again!" });
     }
   }
 
-  static async store(req, res) {
+  static async store(req: Request, res: Response) {
     try {
       const body = req.body;
       const user = req.user;
@@ -55,11 +57,11 @@ class ChatGroupController {
     } catch (error) {
       return res
         .status(500)
-        .json({ message: "Something went wrong. Please try again!" });
+        .json({ message: "Something went wrong.please try again!" });
     }
   }
 
-  static async update(req, res) {
+  static async update(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const body = req.body;
@@ -72,15 +74,16 @@ class ChatGroupController {
         });
         return res.json({ message: "Group updated successfully!" });
       }
+
       return res.status(404).json({ message: "No groups found" });
     } catch (error) {
       return res
         .status(500)
-        .json({ message: "Something went wrong. Please try again!" });
+        .json({ message: "Something went wrong.please try again!" });
     }
   }
 
-  static async destroy(req, res) {
+  static async destroy(req: Request, res: Response) {
     try {
       const { id } = req.params;
       await prisma.chatGroup.delete({
@@ -92,9 +95,9 @@ class ChatGroupController {
     } catch (error) {
       return res
         .status(500)
-        .json({ message: "Something went wrong. Please try again!" });
+        .json({ message: "Something went wrong.please try again!" });
     }
   }
 }
 
-module.exports = ChatGroupController;
+export default ChatGroupController;

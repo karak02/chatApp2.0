@@ -1,7 +1,11 @@
-const { produceMessage } = require("./helper.js");
+import { Server, Socket } from "socket.io";
+import { produceMessage } from "./helper.js";
 
-function setupSocket(io) {
-  io.use((socket, next) => {
+interface CustomSocket extends Socket {
+  room?: string;
+}
+export function setupSocket(io: Server) {
+  io.use((socket: CustomSocket, next) => {
     const room = socket.handshake.auth.room || socket.handshake.headers.room;
     if (!room) {
       return next(new Error("Invalid room"));
@@ -10,15 +14,15 @@ function setupSocket(io) {
     next();
   });
 
-  io.on("connection", (socket) => {
-    // Join the room
+  io.on("connection", (socket: CustomSocket) => {
+    // * Join the room
     socket.join(socket.room);
 
     socket.on("message", async (data) => {
       try {
         await produceMessage("chats", data);
       } catch (error) {
-        console.log("The Kafka produce error is", error);
+        console.log("The kafka produce error is", error);
       }
       socket.to(socket.room).emit("message", data);
     });
@@ -28,5 +32,3 @@ function setupSocket(io) {
     });
   });
 }
-
-module.exports = { setupSocket };

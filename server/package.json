@@ -20,12 +20,9 @@
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.14.11",
-    "autoprefixer": "^10.4.20",
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.4",
-    "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.14",
-    "typescript": "^5.6.3"
+    "typescript": "^5.5.3"
   },
   "dependencies": {
     "@prisma/client": "^5.18.0",
@@ -34,14 +31,12 @@
     "@upstash/kafka": "^1.3.5",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
-    "css": "^3.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "ioredis": "^5.4.1",
     "jsonwebtoken": "^9.0.2",
     "kafkajs": "^2.2.4",
     "prisma": "^5.18.0",
-    "socket.io": "^4.7.5",
-    "tailwind": "^4.0.0"
+    "socket.io": "^4.7.5"
   }
 }
